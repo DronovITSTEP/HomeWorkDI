@@ -11,6 +11,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddTransient<IRepository, Repository>();
 builder.Services.AddTransient<Animal, Cat>();
 builder.Services.AddTransient<Animal, Dog>();
+builder.Services.AddTransient<IFileOperations, FileOperations>();
 
 var app = builder.Build();
 

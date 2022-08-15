@@ -4,6 +4,7 @@
     ViewData["Title"] = "Animal";
 }
 
+<form method="post">
 <table>
     <thead>
         <tr>
@@ -11,18 +12,36 @@
             <th>Sound</th>
         </tr>
     </thead>
-    
-    @foreach (var a in Model.animals)
-    {
-        <tr>
-            @foreach(var i in a.Key)
+        @if (Model.animals2.Count < 1)
+        {
+            @foreach (var item in Model.animals)
             {
-               <td>@i</td>   
+                @for (int i = 0; i < item.Key.Count; i++)
+                {
+                    <tr>
+                        <td>@item.Key[i]</td>
+                        <td>@item.Value[i]</td>
+                    </tr>
+                }
+
             }
-            @foreach (var i in a.Value)
+
+        }
+        else {
+            @foreach(var item in Model.animals2)
             {
-                <td>@i</td>  
+                    <tr>
+                        <td>@item.Key</td>
+                        <td>@item.Value</td>
+                    </tr>
+                }
             }
-    </tr>
-    }
-</table>
+        }
+    </table>
+<input type="submit" value="Save File" asp-page-handler="SaveFile"/>
+</form>
+<form asp-action="LoadFile" method="post" enctype="multipart/form-data">
+    <input type="file" name="uploadedFile"/>
+    <br />
+    <input type="submit" value="Load" asp-page-handler="LoadFile"/>
+</form>
